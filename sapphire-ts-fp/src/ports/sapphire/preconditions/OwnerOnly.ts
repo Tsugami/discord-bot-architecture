@@ -1,6 +1,8 @@
 import { AllFlowsPrecondition } from '@sapphire/framework';
 import type { CommandInteraction, ContextMenuInteraction, Message, Snowflake } from 'discord.js';
 import { envParseArray } from '#lib/env-parser';
+import { pipe } from 'fp-ts/lib/function';
+import * as O from 'fp-ts/Option';
 
 const OWNERS = envParseArray('OWNERS');
 
@@ -20,7 +22,14 @@ export class UserPrecondition extends AllFlowsPrecondition {
 	}
 
 	private doOwnerCheck(userId: Snowflake) {
-		return OWNERS.includes(userId) ? this.ok() : this.error({ message: this.#message });
+		return pipe(
+			OWNERS,
+			O.chain((ids) => (ids.includes(userId) ? O.some(true) : O.none)),
+			O.match(
+				() => this.error({ message: this.#message }),
+				() => this.ok()
+			)
+		);
 	}
 }
 

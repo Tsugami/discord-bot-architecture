@@ -1081,6 +1081,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fp-ts@npm:^2.13.1":
+  version: 2.13.1
+  resolution: "fp-ts@npm:2.13.1"
+  checksum: 618e0028aca9ff1d52b86f438499ccab149825bdab14c678d22c3e2ccbf9d36fd1f26d463bf0ae1e63f5cd79dd54c8218af2cca0daeea68b039307b751ae9563
+  languageName: node
+  linkType: hard
+
 "from@npm:~0":
   version: 0.1.7
   resolution: "from@npm:0.1.7"
@@ -2272,6 +2279,7 @@ __metadata:
     "@types/ws": ^8.5.3
     discord.js: ^13.11.0
     dotenv-cra: ^3.0.2
+    fp-ts: ^2.13.1
     npm-run-all: ^4.1.5
     prettier: ^2.7.1
     reflect-metadata: ^0.1.13

@@ -1,11 +1,11 @@
-import { isNullishOrEmpty } from '@sapphire/utilities';
+import * as O from 'fp-ts/Option';
+import { pipe } from 'fp-ts/function';
 
-export function envParseArray(key: 'OWNERS', defaultValue?: string[]): string[] {
-	const value = process.env[key];
-	if (isNullishOrEmpty(value)) {
-		if (defaultValue === undefined) throw new Error(`[ENV] ${key} - The key must be an array, but is empty or undefined.`);
-		return defaultValue;
-	}
-
-	return value.split(' ');
+export function envParseArray(key: 'OWNERS', defaultValue?: string[]): O.Option<string[]> {
+	return pipe(
+		process.env[key],
+		O.fromNullable,
+		O.map((str) => str.split(' ')),
+		O.alt(() => pipe(defaultValue, O.fromNullable))
+	);
 }
