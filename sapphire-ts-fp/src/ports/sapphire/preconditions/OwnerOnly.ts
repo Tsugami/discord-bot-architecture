@@ -3,13 +3,8 @@ import type {
   CommandInteraction,
   ContextMenuInteraction,
   Message,
-  Snowflake,
 } from "discord.js";
-import { envParseArray } from "#lib/env-parser";
-import { pipe } from "fp-ts/lib/function";
-import * as O from "fp-ts/Option";
-
-const OWNERS = envParseArray("OWNERS");
+import { isDev } from "#core/validation/is-dev.validation";
 
 export class UserPrecondition extends AllFlowsPrecondition {
   #message = "This command can only be used by the owner.";
@@ -26,16 +21,10 @@ export class UserPrecondition extends AllFlowsPrecondition {
     return this.doOwnerCheck(message.author.id);
   }
 
-  private doOwnerCheck(userId: Snowflake) {
-    return pipe(
-      OWNERS,
-      O.chain((ids) => (ids.includes(userId) ? O.some(true) : O.none)),
-      O.match(
-        () => this.error({ message: this.#message }),
-        () => this.ok()
-      )
-    );
-  }
+  private doOwnerCheck = isDev({
+    done: () => this.ok(),
+    fail: () => this.error({ message: this.#message }),
+  });
 }
 
 declare module "@sapphire/framework" {

@@ -1,4 +1,5 @@
 {
+	"exclude": [".*\\.(spec|test)\\.ts$", "src/tests*"],
 	"jsc": {
 		"parser": {
 			"syntax": "typescript",
@@ -6,6 +7,7 @@
 		},
 		"target": "es2020",
 		"paths": {
+			"#core/*": ["./core/*"],
 			"#lib/*": ["./lib/*"]
 		},
 		"baseUrl": "./src"
