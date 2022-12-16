@@ -1,0 +1,17 @@
+{
+	"extends": "@sapphire/ts-config",
+	"compilerOptions": {
+		"experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+		"rootDir": "src",
+		"outDir": "dist",
+		"baseUrl": "src",
+		"tsBuildInfoFile": "dist/.tsbuildinfo",
+		"paths": {
+			"#lib/*": ["./lib/*"],
+			"#core/*": ["./core/*"],
+			"#ports/*": ["./ports/*"]
+		}
+	},
+	"include": ["src"]
+}

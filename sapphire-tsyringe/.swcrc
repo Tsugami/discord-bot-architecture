@@ -1,0 +1,22 @@
+{
+	"exclude": [".*\\.(spec|test)\\.ts$", "src/tests*"],
+	"jsc": {
+		"parser": {
+			"syntax": "typescript",
+			"decorators": true
+		},
+		"transform": {
+      "decoratorMetadata": true
+		},
+		"target": "es2022",
+		"paths": {
+			"#lib/*": ["./lib/*"],
+			"#core/*": ["./core/*"],
+			"#ports/*": ["./ports/*"]
+		},
+		"baseUrl": "./src"
+	},
+	"module": {
+		"type": "commonjs"
+	}
+}
